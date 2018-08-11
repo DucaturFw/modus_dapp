@@ -1,5 +1,2 @@
-DUCATUTAR TOKEN EXPLORER
+MODUS EXCHANGE
 
-yarn 
-
-yarn start
