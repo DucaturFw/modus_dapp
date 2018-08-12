@@ -4,17 +4,8 @@ import FA from 'react-fontawesome';
 import styled from 'react-emotion';
 
 import Token from './token';
-import { getEventSubscriber } from './../../models';
 
 class TokenList extends React.Component {
-  componentDidMount() {
-    getEventSubscriber().on('data', res => {
-      let data = res.returnValues;
-
-      console.log('get event', data);
-    });
-  }
-
   get list() {
     const { id } = this.props.match.params;
 

@@ -23,8 +23,40 @@ class Events extends React.Component {
     }
   }
 
+  getEvents() {
+    const { bet, lot } = this.props;
+    let list = [];
+
+    bet.forEach(item => list.push(item));
+    lot.forEach(item => list.push(item));
+    list.sort((a, b) => b.blockNumber - a.blockNumber);
+
+    return list;
+  }
+
+  getEventsElems() {
+    const list = this.getEvents();
+
+    return list.map(item => {
+      const data = item.returnValues;
+      return (
+        <div>
+          <MarkedText>Block: {item.blockNumber}</MarkedText>
+          <br />
+          {item.event == 'CreateBet' && (
+            <p>
+              Create bet for token {data.lot} with [{data.amounts[0]}, {data.amounts[1]}]
+            </p>
+          )}
+          {item.event == 'CreateLot' && <p>Create Lot for token {data.lot}</p>}
+        </div>
+      );
+    });
+  }
+
   render() {
     // console.log(this.props);
+    this.getEvents();
 
     return (
       <Wrapper>
@@ -34,18 +66,17 @@ class Events extends React.Component {
         </Item>
         <Item>
           <Title>Auction Blockchain Events</Title>
-          <Window>
-            <div>
-              <MarkedText>10.12.1313</MarkedText>
-              <br />
-              <p>Created contract at 0x4o342fhiwuehf87382382r</p>
-            </div>
-          </Window>
+          <Window>{this.getEventsElems()}</Window>
         </Item>
       </Wrapper>
     );
   }
 }
+export default connect(state => ({
+  created: state.details.created,
+  bet: state.details.bet,
+  lot: state.details.lot
+}))(Events);
 
 const Wrapper = styled.div`
   flex: 0 0 50%;
@@ -64,6 +95,8 @@ const Item = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
+
+  overflow-y: auto;
 `;
 
 const Title = styled.div`
@@ -85,7 +118,3 @@ const MarkedText = styled.span`
   font-weight: 700;
   color: ${props => props.theme.text.main};
 `;
-
-export default connect(state => ({
-  created: state.details.created
-}))(Events);

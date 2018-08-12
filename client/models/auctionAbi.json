@@ -1,0 +1,354 @@
+[
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "lot",
+        "type": "uint256"
+      },
+      {
+        "name": "amounts",
+        "type": "uint256[]"
+      },
+      {
+        "name": "secretHash",
+        "type": "bytes20"
+      }
+    ],
+    "name": "createBet",
+    "outputs": [
+      {
+        "name": "bet",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "ftId",
+        "type": "uint256"
+      },
+      {
+        "name": "tokens",
+        "type": "address[]"
+      },
+      {
+        "name": "parts",
+        "type": "uint256[]"
+      },
+      {
+        "name": "amountETH",
+        "type": "uint256"
+      }
+    ],
+    "name": "createLot",
+    "outputs": [
+      {
+        "name": "lot",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "previousOwner",
+        "type": "address"
+      }
+    ],
+    "name": "OwnershipRenounced",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "lot",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "name": "sender",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "bet",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "amounts",
+        "type": "uint256[]"
+      },
+      {
+        "indexed": false,
+        "name": "secretHash",
+        "type": "bytes20"
+      }
+    ],
+    "name": "CreateBet",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "previousOwner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "OwnershipTransferred",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "lot",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "name": "owner",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "tokens",
+        "type": "address[]"
+      },
+      {
+        "indexed": false,
+        "name": "parts",
+        "type": "uint256[]"
+      },
+      {
+        "indexed": false,
+        "name": "amountETH",
+        "type": "uint256"
+      }
+    ],
+    "name": "CreateLot",
+    "type": "event"
+  },
+  {
+    "constant": false,
+    "inputs": [],
+    "name": "renounceOwnership",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "transferOwnership",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "lot",
+        "type": "uint256"
+      },
+      {
+        "name": "bet",
+        "type": "uint256"
+      }
+    ],
+    "name": "getBetAmounts",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256[]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "lot",
+        "type": "uint256"
+      },
+      {
+        "name": "bet",
+        "type": "uint256"
+      }
+    ],
+    "name": "getBetSecretHash",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes20"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "lot",
+        "type": "uint256"
+      },
+      {
+        "name": "bet",
+        "type": "uint256"
+      }
+    ],
+    "name": "getBetSender",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "lot",
+        "type": "uint256"
+      }
+    ],
+    "name": "getWinBetInfo",
+    "outputs": [
+      {
+        "name": "score",
+        "type": "uint256"
+      },
+      {
+        "name": "secretHash",
+        "type": "bytes20"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "lot",
+        "type": "uint256"
+      }
+    ],
+    "name": "getWinningBet",
+    "outputs": [
+      {
+        "name": "betID",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "lotCount",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "lots",
+    "outputs": [
+      {
+        "name": "owner",
+        "type": "address"
+      },
+      {
+        "name": "expiration",
+        "type": "uint256"
+      },
+      {
+        "name": "betCount",
+        "type": "uint256"
+      },
+      {
+        "name": "winningBet",
+        "type": "uint256"
+      },
+      {
+        "name": "winningScore",
+        "type": "uint256"
+      },
+      {
+        "name": "winningsecretHash",
+        "type": "bytes20"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  }
+]

@@ -1,12 +1,16 @@
 import Web3 from 'web3';
 
 import { factoryCreateToken, factoryGetTokens, factoryGetStatuses, factoryGetSubscriber } from './factory';
+import { getBetSubscriber, getLotSubscriber, getAuctionBetData, getAuctionLotData } from './auction';
 
-let localWeb3, userAccount;
+let localWeb3, userAccount, auctionWeb3;
+
+const AUCTION_PROVIDER_URL = 'ws://172.16.30.127:4267';
 
 export const init = () => {
   return new Promise((res, rej) => {
     if (typeof web3 !== 'undefined') {
+      auctionWeb3 = new Web3(new Web3.providers.WebsocketProvider(AUCTION_PROVIDER_URL));
       // eslint-disable-next-line
         // localWeb3 = new Web3(web3.currentProvider);
       localWeb3 = new Web3(window.multiWeb.getWeb3Provider());
@@ -56,4 +60,26 @@ export const getHistoryStates = id => {
 
 export const getEventSubscriber = () => {
   return factoryGetSubscriber(localWeb3);
+};
+
+export const getAuctionEvents = () => {
+  return getBetSubscriber(auctionWeb3);
+};
+
+export const getAuctionLotEvents = () => {
+  return getLotSubscriber(auctionWeb3);
+};
+
+export const getBetData = () => {
+  // let events;
+  return getAuctionBetData(auctionWeb3);
+  // .then(evnts => {
+  //   events = event;
+
+  //   return Promise.all(){}
+  // })
+};
+
+export const getLotData = () => {
+  return getAuctionLotData(auctionWeb3);
 };

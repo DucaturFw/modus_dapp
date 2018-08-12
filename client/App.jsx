@@ -9,6 +9,7 @@ import styled from 'react-emotion';
 import FA from 'react-fontawesome';
 
 import TokensActions from './actions/tokens';
+import DetailsActions from './actions/details';
 
 import Header from './pages/header';
 import List from './pages/list';
@@ -18,12 +19,30 @@ import Detail from './pages/detail';
 
 import { init } from './models';
 
+import { getEventSubscriber, getAuctionEvents, getAuctionLotEvents, getBetData, getLotData } from './models';
+
 class App extends Component {
   componentDidMount() {
+    console.log(this.props);
+
     init()
       .then(this.props.loadERC20)
       .then(this.props.load)
-      .then(this.props.loadComplete);
+      .then(this.props.loadComplete)
+      .then(() => {
+        console.log('start listening');
+
+        getBetData().then(this.props.betLoad);
+        getLotData().then(this.props.lotLoad);
+        getAuctionEvents().on('data', this.props.betPush);
+        getAuctionLotEvents().on('data', this.props.lotPush);
+
+        getEventSubscriber().on('data', res => {
+          let data = res.returnValues;
+
+          console.log('get event', data);
+        });
+      });
   }
 
   render() {
@@ -68,7 +87,7 @@ export default connect(
   state => ({
     loading: state.tokens.loading
   }),
-  dispatch => bindActionCreators(TokensActions, dispatch)
+  dispatch => bindActionCreators({ ...TokensActions, ...DetailsActions }, dispatch)
 )(App);
 
 const Container = styled('div')`

@@ -1,7 +1,9 @@
-import { DETAIL_CREATE } from './../constant/details';
+import { DETAIL_CREATE, BET_LOAD, BET_PUSH, LOT_PUSH, LOT_LOAD } from './../constant/details';
 
 const initialState = {
-  created: null
+  created: null,
+  bet: [],
+  lot: []
 };
 
 export default function accountReducer(state = initialState, action) {
@@ -10,6 +12,30 @@ export default function accountReducer(state = initialState, action) {
       return {
         ...state,
         created: action.payload
+      };
+    }
+    case BET_LOAD: {
+      return {
+        ...state,
+        bet: action.payload
+      };
+    }
+    case BET_PUSH: {
+      return {
+        ...state,
+        bet: [...state.bet, action.payload]
+      };
+    }
+    case LOT_PUSH: {
+      return {
+        ...state,
+        lot: [...state.lot, action.payload]
+      };
+    }
+    case LOT_LOAD: {
+      return {
+        ...state,
+        lot: action.payload
       };
     }
     default:

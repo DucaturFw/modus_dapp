@@ -57,8 +57,12 @@ const TokensActions = {
     });
   },
   loadComplete: () => (dispatch, getState) => {
-    dispatch({
-      type: LOAD_COMPLETE
+    return new Promise((res, rej) => {
+      dispatch({
+        type: LOAD_COMPLETE
+      });
+
+      res();
     });
   }
 };
