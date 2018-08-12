@@ -36,3 +36,8 @@ export const factoryGetStatuses = (localWeb3, id) => {
   init(localWeb3);
   return contractInstance.getPastEvents('changeState', { fromBlock: 0, toBlock: 'latest' });
 };
+
+export const factoryGetSubscriber = localWeb3 => {
+  init(localWeb3);
+  return contractInstance.events.NewToken();
+};

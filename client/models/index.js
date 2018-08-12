@@ -1,6 +1,6 @@
 import Web3 from 'web3';
 
-import { factoryCreateToken, factoryGetTokens, factoryGetStatuses } from './factory';
+import { factoryCreateToken, factoryGetTokens, factoryGetStatuses, factoryGetSubscriber } from './factory';
 
 let localWeb3, userAccount;
 
@@ -52,4 +52,8 @@ export const getCreatedToken = id => {
 
 export const getHistoryStates = id => {
   return factoryGetStatuses(localWeb3, id);
+};
+
+export const getEventSubscriber = () => {
+  return factoryGetSubscriber(localWeb3);
 };
