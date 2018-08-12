@@ -18,8 +18,8 @@ export const init = () => {
     if (typeof web3 !== 'undefined') {
       auctionWeb3 = new Web3(new Web3.providers.WebsocketProvider(AUCTION_PROVIDER_URL));
       // eslint-disable-next-line
-        // localWeb3 = new Web3(web3.currentProvider);
-      localWeb3 = new Web3(window.multiWeb.getWeb3Provider());
+        localWeb3 = new Web3(web3.currentProvider);
+      // localWeb3 = new Web3(window.multiWeb.getWeb3Provider());
       // eslint-disable-next-line
         // userAccount = web3.eth.defaultAccount;
       localWeb3.eth.getAccounts().then(accounts => {

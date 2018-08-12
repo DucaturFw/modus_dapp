@@ -1,6 +1,6 @@
 import abi from './auctionAbi';
 
-const contractAddress = '0xb7140a87b2144732d9bd1d159c5c606f2b7e9ae2';
+const contractAddress = '0x235b734cb7e0bd10513c8be5f2319a2360ae3d13';
 
 let contractInstance;
 
