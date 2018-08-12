@@ -6,6 +6,7 @@ import { ThemeProvider } from 'emotion-theming';
 import theme from './styles/theme';
 import './styles/styles.css';
 import styled from 'react-emotion';
+import FA from 'react-fontawesome';
 
 import TokensActions from './actions/tokens';
 
@@ -29,7 +30,16 @@ class App extends Component {
     const { loading } = this.props;
 
     if (loading) {
-      return <div>loading...</div>;
+      return (
+        <ThemeProvider theme={theme}>
+          <Wrapper>
+            <Loader>
+              <StyledIcon name="spinner" spin />
+              loading...
+            </Loader>
+          </Wrapper>
+        </ThemeProvider>
+      );
     }
 
     return (
@@ -79,4 +89,22 @@ const Main = styled.div`
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+`;
+
+const Wrapper = styled.div`
+  height: 100%;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+`;
+
+const StyledIcon = styled(FA)`
+  font-size: 1.8rem;
+  color: ${props => props.theme.text.dark};
+  margin-right: 20px;
+`;
+
+const Loader = styled.div`
+  font-size: 2rem;
 `;
