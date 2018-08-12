@@ -1,32 +1,26 @@
 export default [
   {
-    address: '0xeB1015b6Ed2868EBBf9bF553944A7e7972D9BfB8',
-    sign: 'WTF',
-    price: 1
+    name: 'Maker',
+    sign: 'MKR',
+    address: '0x6e8c1223e027de8e9a7f9b910ad6190458a1ce5e',
+    price: 1.46
   },
   {
-    address: '0x6a51ddaAB34d05a2AEB8e7738ba839Db9D524Cc1',
-    sign: 'EID',
-    price: 2
+    name: 'OmiseGO',
+    sign: 'OMG',
+    address: '0x4133bc0d26756ca12eb06d2dc7cfbdac2d9595fb',
+    price: 0.013
   },
   {
-    address: '0xF4c6bD9366f7Af66FA6E701e6cbad2Fca87E09b2',
-    sign: 'WRS',
-    price: 3
+    name: 'StatusNetwork',
+    sign: 'SNT',
+    address: '0xa17fafbab3a66262509c27bf4430bb4ec86af33a',
+    price: 0.00013
   },
   {
-    address: '0x325ea5972BB0Fa21d13FDE235B1A0F47D3b95181',
-    sign: 'IOW',
-    price: 4
-  },
-  {
-    address: '0xFF7797bFa86c2FB425Fc13674d569b9EDE897dc5',
-    sign: 'KNG',
-    price: 5
-  },
-  {
-    address: '0x43d041D4c8b83C5B70Fa06e1415AbA361f89d2BC',
-    sign: 'FTH',
-    price: 6
+    name: 'Bancor',
+    sign: 'BNT',
+    address: '0xe403a838cfe077ba2cfd24c1d04a7e8648377f13',
+    price: 0.0052
   }
 ];

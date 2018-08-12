@@ -10,7 +10,7 @@ class TokenList extends React.Component {
     const { id } = this.props.match.params;
 
     return this.props.tokens.map((token, idx) => {
-      return <Token data={token} key={idx} active={token.address === id} />;
+      return <Token data={token} key={idx} active={token.tokenId === id} />;
     });
   }
 

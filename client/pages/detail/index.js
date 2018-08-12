@@ -9,7 +9,7 @@ class Details extends React.Component {
   getToken() {
     const { id } = this.props.match.params;
 
-    return this.props.tokens.find(token => token.address === id);
+    return this.props.tokens.find(token => token.tokenId === id);
   }
 
   render() {

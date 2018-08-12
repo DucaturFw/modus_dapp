@@ -8,11 +8,20 @@ class TokenItem extends React.Component {
     const { data: token, active } = this.props;
     return (
       <Wrapper active={active}>
-        <LinkDecorator to={`/${token.address}`}>
-          <Title>{token.address}</Title>
+        <LinkDecorator to={`/${token.tokenId}`}>
+          <Title>Id: {token.tokenId}</Title>
           <div>
-            <span>Count: {token.tokens.length}</span>
+            <span>Stake: {token.stake}</span>
           </div>
+          {token.tokens.map(tkn => {
+            return (
+              <div key={tkn.address}>
+                <span>
+                  {tkn.sign} ({tkn.price} USD): {tkn.stake}%
+                </span>
+              </div>
+            );
+          })}
         </LinkDecorator>
       </Wrapper>
     );
@@ -29,7 +38,10 @@ const Wrapper = styled.div`
   background: ${props => (props.active ? props.theme.misc.activeLight : props.theme.comp.back)};
 `;
 
-const Title = styled.h5``;
+const Title = styled.h5`
+  font-size: 1.5rem;
+  font-weight: bold;
+`;
 
 const LinkDecorator = styled(Link)`
   display: block;

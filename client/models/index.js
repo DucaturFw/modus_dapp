@@ -19,9 +19,6 @@ export const init = () => {
 
         res();
       });
-
-      // console.log(web3.eth.defaultAccount);
-      // res();
     } else {
       rej();
     }
@@ -36,32 +33,23 @@ export const createToken = (addr, stake, amount) => {
 };
 
 export const getAllTokens = () => {
-  return factoryGetTokens(localWeb3).then(result => {
-    if (result) {
-      return result
-        .map(item => ({
-          holder: item.returnValues.holder,
-          token: item.returnValues.token
-        }))
-        .filter(item => item.holder.toLowerCase() === userAccount.toLowerCase());
-    } else {
-      return null;
-    }
+  return factoryGetTokens(localWeb3).then(events => {
+    return events.map(({ returnValues: data }) => data);
   });
 };
 
 export const getETFToken = address => {
-  return factoryGetETFTokens(localWeb3, address).then(result => {
-    return {
-      address,
-      tokens: result._tokens,
-      stake: result._weights
-    };
-  });
+  // return factoryGetETFTokens(localWeb3, address).then(result => {
+  //   return {
+  //     address,
+  //     tokens: result._tokens,
+  //     stake: result._weights
+  //   };
+  // });
 };
 
 export const getAllETF = () => {
-  return getAllTokens().then(list => {
-    return Promise.all(list.map(item => getETFToken(item.token)));
-  });
+  // return getAllTokens().then(list => {
+  //   return Promise.all(list.map(item => getETFToken(item.token)));
+  // });
 };

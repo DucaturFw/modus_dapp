@@ -3,34 +3,37 @@ import { TOKENS_LOAD, ERC20_LIST_LOAD, LOAD_COMPLETE } from './../constant/token
 // import tokens from './mockTOKENS';
 import erc20List from './mockERC20';
 
-import { getAllETF } from './../models';
+import { getAllTokens } from './../models';
 
 const TokensActions = {
   load: () => (dispatch, getState) => {
     return new Promise((res, rej) => {
-      getAllETF()
+      getAllTokens()
         .then(tokens => {
           const erc20 = getState().tokens.erc20;
 
           return tokens.map(token => {
             const matchTokens = token.tokens.map((address, idx) => {
-              const erc20Matched = erc20.find(item => item.address === address);
+              const erc20Matched = erc20.find(item => item.address.toLowerCase() === address.toLowerCase());
 
               return {
                 address,
                 sign: erc20Matched.sign,
-                stake: token.stake[idx],
-                price: erc20Matched.price
+                stake: token.parts[idx],
+                price: erc20Matched.price,
+                name: erc20Matched.name
               };
             });
-
             return {
-              address: token.address,
-              tokens: matchTokens
+              tokenId: token.tokenId,
+              tokens: matchTokens,
+              stake: token.stake,
+              holder: token.holder
             };
           });
         })
         .then(tokens => {
+          console.log('tokens', tokens);
           dispatch({
             type: TOKENS_LOAD,
             payload: {
@@ -53,6 +56,7 @@ const TokensActions = {
       res(erc20List);
     });
   },
+  getHistory: () => (dispatch, getState) => {},
   loadComplete: () => (dispatch, getState) => {
     dispatch({
       type: LOAD_COMPLETE

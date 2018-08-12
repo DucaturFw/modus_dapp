@@ -11,15 +11,23 @@ class Process extends React.Component {
         <Token key={item.address}>
           <Sign>{item.sign}</Sign>
           <Info>
+            <span>Name:</span>
+            &nbsp;&nbsp;
+            {item.name}
+          </Info>
+          <Info>
             <span>Address:</span>
+            &nbsp;&nbsp;
             {item.address}
           </Info>
           <Info>
             <span>Price:</span>
+            &nbsp;&nbsp;
             {item.price}
           </Info>
           <Info>
             <span>Stake:</span>
+            &nbsp;&nbsp;
             {item.stake}
           </Info>
         </Token>
@@ -29,12 +37,11 @@ class Process extends React.Component {
 
   render() {
     const { token } = this.props;
-    console.log(token);
 
     return (
       <Wrapper>
         <Title>Info about your ETF-Token</Title>
-        <div>Address: {token.address}</div>
+        <div>Address: {token.tokenId}</div>
         {this.list}
       </Wrapper>
     );

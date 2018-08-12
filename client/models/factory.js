@@ -1,6 +1,6 @@
 import abi from './factoryAbi';
 
-const contractAddress = '0x7371ea969af4bc5b8ac03cbd3dcbb654003a8ffe';
+const contractAddress = '0x8bede53c27d1afd0b73d11d1ea6ecaff50d59150';
 
 let contractInstance;
 
