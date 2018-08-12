@@ -16,13 +16,15 @@ const TokensActions = {
             const matchTokens = token.tokens.map((address, idx) => {
               const erc20Matched = erc20.find(item => item.address.toLowerCase() === address.toLowerCase());
 
-              return {
-                address,
-                sign: erc20Matched.sign,
-                stake: token.parts[idx],
-                price: erc20Matched.price,
-                name: erc20Matched.name
-              };
+              if (erc20Matched) {
+                return {
+                  address,
+                  sign: erc20Matched.sign,
+                  stake: token.parts[idx],
+                  price: erc20Matched.price,
+                  name: erc20Matched.name
+                };
+              }
             });
             return {
               tokenId: token.tokenId,

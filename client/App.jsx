@@ -19,12 +19,18 @@ import Detail from './pages/detail';
 
 import { init } from './models';
 
-import { getEventSubscriber, getAuctionEvents, getAuctionLotEvents, getBetData, getLotData } from './models';
+import {
+  getEventSubscriber,
+  getAuctionEvents,
+  getAuctionLotEvents,
+  getBetData,
+  getLotData,
+  getHistoryStates,
+  getHistorySubscribe
+} from './models';
 
 class App extends Component {
   componentDidMount() {
-    console.log(this.props);
-
     init()
       .then(this.props.loadERC20)
       .then(this.props.load)
@@ -40,7 +46,15 @@ class App extends Component {
         getEventSubscriber().on('data', res => {
           let data = res.returnValues;
 
-          console.log('get event', data);
+          console.log('get new token event', data);
+        });
+
+        getHistoryStates().then(console.log);
+
+        getHistorySubscribe().on('data', res => {
+          let data = res.returnValues;
+
+          console.log('get state event', data);
         });
       });
   }

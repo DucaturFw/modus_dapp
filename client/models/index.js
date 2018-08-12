@@ -1,11 +1,17 @@
 import Web3 from 'web3';
 
-import { factoryCreateToken, factoryGetTokens, factoryGetStatuses, factoryGetSubscriber } from './factory';
+import {
+  factoryCreateToken,
+  factoryGetTokens,
+  factoryGetStatuses,
+  factoryGetSubscriber,
+  factoryStatusSubscriber
+} from './factory';
 import { getBetSubscriber, getLotSubscriber, getAuctionBetData, getAuctionLotData } from './auction';
 
 let localWeb3, userAccount, auctionWeb3;
 
-const AUCTION_PROVIDER_URL = 'ws://172.16.30.127:4267';
+const AUCTION_PROVIDER_URL = 'ws://139.59.93.80:4267';
 
 export const init = () => {
   return new Promise((res, rej) => {
@@ -54,8 +60,12 @@ export const getCreatedToken = id => {
   });
 };
 
-export const getHistoryStates = id => {
-  return factoryGetStatuses(localWeb3, id);
+export const getHistoryStates = () => {
+  return factoryGetStatuses(localWeb3);
+};
+
+export const getHistorySubscribe = () => {
+  return factoryStatusSubscriber(localWeb3);
 };
 
 export const getEventSubscriber = () => {
