@@ -14,16 +14,7 @@ import createActions from './../../actions/create';
 
 class Create extends React.Component {
   state = {
-    tokens: [
-      {
-        sign: null,
-        stake: null
-      },
-      {
-        sign: null,
-        stake: null
-      }
-    ],
+    tokens: [],
     amount: 1
   };
 
@@ -76,14 +67,19 @@ class Create extends React.Component {
   };
 
   getOptions = () => {
-    return this.props.erc20.map(token => ({
+    return this.props.erc20.filter(tkn => !this.state.tokens.find(item => item.sign === tkn.sign)).map(token => ({
       value: token.sign,
       label: token.sign
     }));
   };
 
   setAccept = idx => {
-    this.updateToken(idx, { stake: 0 });
+    let stake = 0;
+
+    if (this.state.tokens.length === 1) {
+      stake = 100;
+    }
+    this.updateToken(idx, { stake });
   };
 
   selectOnChange = (idx, e) => {
@@ -102,7 +98,24 @@ class Create extends React.Component {
 
   rangeHandle = (token, idx, value) => {
     this.updateToken(idx, { stake: value });
+
+    this.getStakeTokens(idx, value).map(item => {
+      this.updateToken(item.index, { stake: item.stake });
+    });
   };
+
+  getStakeTokens(idx, value) {
+    const stakes = this.state.tokens.map((tkn, i) => ({ ...tkn, index: i })).filter(tkn => tkn.index !== idx);
+    const sum = stakes.reduce((sum, item) => {
+      return sum + item.stake;
+    }, 0);
+    const rest = 100 - value;
+
+    return stakes.map(tkn => ({
+      ...tkn,
+      stake: Math.round((tkn.stake / sum) * rest)
+    }));
+  }
 
   handleRemove = idx => {
     this.setState(state => ({
