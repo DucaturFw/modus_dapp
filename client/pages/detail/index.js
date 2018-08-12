@@ -1,11 +1,27 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import styled from 'react-emotion';
 
 import Info from './info';
 import Events from './events';
 
+import detilsActions from './../../actions/details';
+
 class Details extends React.Component {
+  componentDidMount() {
+    const token = this.getToken();
+
+    this.props.getHistory(token.tokenId);
+  }
+
+  componentWillReceiveProps(newProps) {
+    const { id } = newProps.match.params;
+    const token = newProps.tokens.find(token => token.tokenId === id);
+
+    newProps.getHistory(token.tokenId);
+  }
+
   getToken() {
     const { id } = this.props.match.params;
 
@@ -42,6 +58,9 @@ const Title = styled.h5`
   font-size: 2rem;
 `;
 
-export default connect(state => ({
-  tokens: state.tokens.list
-}))(Details);
+export default connect(
+  state => ({
+    tokens: state.tokens.list
+  }),
+  dispatch => bindActionCreators(detilsActions, dispatch)
+)(Details);

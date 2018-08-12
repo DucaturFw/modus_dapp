@@ -1,7 +1,6 @@
 import Web3 from 'web3';
 
-import { factoryCreateToken, factoryGetTokens } from './factory';
-import { factoryGetETFTokens } from './etf';
+import { factoryCreateToken, factoryGetTokens, factoryGetStatuses } from './factory';
 
 let localWeb3, userAccount;
 
@@ -38,18 +37,19 @@ export const getAllTokens = () => {
   });
 };
 
-export const getETFToken = address => {
-  // return factoryGetETFTokens(localWeb3, address).then(result => {
-  //   return {
-  //     address,
-  //     tokens: result._tokens,
-  //     stake: result._weights
-  //   };
-  // });
+export const getCreatedToken = id => {
+  return factoryGetTokens(localWeb3).then(events => {
+    const event = events.find(ev => ev.returnValues.tokenId === id);
+
+    return localWeb3.eth.getBlock(event.blockNumber).then(result => {
+      return {
+        timestamp: result.timestamp,
+        transactionHash: event.transactionHash
+      };
+    });
+  });
 };
 
-export const getAllETF = () => {
-  // return getAllTokens().then(list => {
-  //   return Promise.all(list.map(item => getETFToken(item.token)));
-  // });
+export const getHistoryStates = id => {
+  return factoryGetStatuses(localWeb3, id);
 };

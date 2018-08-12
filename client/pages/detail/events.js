@@ -2,19 +2,35 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'react-emotion';
 
+import { format } from 'date-fns';
+
 class Events extends React.Component {
+  getCreated() {
+    if (this.props.created) {
+      let date = format(new Date(this.props.created.timestamp * 1000), 'HH:mm MM/DD/YYYY');
+      return (
+        <div>
+          <MarkedText>{date}</MarkedText>
+          <br />
+          <p>
+            <a href={`https://ropsten.etherscan.io/tx/${this.props.created.transactionHash}`} target="_blank">
+              [txhash]
+            </a>
+            Token created
+          </p>
+        </div>
+      );
+    }
+  }
+
   render() {
+    // console.log(this.props);
+
     return (
       <Wrapper>
         <Item>
           <Title>Main Blockchain Events</Title>
-          <Window>
-            <div>
-              <MarkedText>10.12.1313</MarkedText>
-              <br />
-              <p>Created contract at 0x4o342fhiwuehf87382382r</p>
-            </div>
-          </Window>
+          <Window>{this.getCreated()}</Window>
         </Item>
         <Item>
           <Title>Auction Blockchain Events</Title>
@@ -70,4 +86,6 @@ const MarkedText = styled.span`
   color: ${props => props.theme.text.main};
 `;
 
-export default connect(null)(Events);
+export default connect(state => ({
+  created: state.details.created
+}))(Events);

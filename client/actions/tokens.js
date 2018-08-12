@@ -3,7 +3,7 @@ import { TOKENS_LOAD, ERC20_LIST_LOAD, LOAD_COMPLETE } from './../constant/token
 // import tokens from './mockTOKENS';
 import erc20List from './mockERC20';
 
-import { getAllTokens } from './../models';
+import { getAllTokens, getCreatedToken } from './../models';
 
 const TokensActions = {
   load: () => (dispatch, getState) => {
@@ -56,7 +56,6 @@ const TokensActions = {
       res(erc20List);
     });
   },
-  getHistory: () => (dispatch, getState) => {},
   loadComplete: () => (dispatch, getState) => {
     dispatch({
       type: LOAD_COMPLETE
