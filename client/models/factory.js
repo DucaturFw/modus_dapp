@@ -2,7 +2,7 @@ import abi from './factoryAbi';
 
 const contractAddress = '0x7371ea969af4bc5b8ac03cbd3dcbb654003a8ffe';
 
-let contractInstance, userAccount;
+let contractInstance;
 
 const init = localWeb3 => {
   if (!contractInstance) {
@@ -14,8 +14,6 @@ const init = localWeb3 => {
 
 export const factoryCreateToken = (localWeb3, userAccount) => (addr, stake, amount) => {
   init(localWeb3);
-
-  console.log(userAccount);
 
   return new Promise((res, rej) => {
     contractInstance.methods

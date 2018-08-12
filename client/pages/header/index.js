@@ -28,7 +28,7 @@ class Header extends React.Component {
                 <Signal active /> Main
               </Label>
               <Label>
-                <Signal /> Plasma
+                <Signal active /> Auction
               </Label>
             </div>
           </Info>
