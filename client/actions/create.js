@@ -1,5 +1,7 @@
 import { createToken } from '../models';
 
+import tokenActions from './tokens';
+
 const createActions = {
   createToken: (tokensStake, amount) => (dispatch, getState) => {
     const erc20 = getState().tokens.erc20;
@@ -13,9 +15,17 @@ const createActions = {
       stakes.push(tokensStake[i].stake);
     }
 
+    setTimeout(() => {
+      tokenActions
+        .load()(dispatch, getState)
+        .then(() => {
+          window.history.pushState({ page: 'Detail' }, 'New ETF-Token', '/');
+        });
+    }, 60 * 1000);
+
     return createToken(address, stakes, amount)
       .then(result => {
-        // console.log('result', result);
+        console.log('result', result);
         const {
           events: {
             NewToken: { address }
@@ -28,6 +38,11 @@ const createActions = {
       })
       .then(({ address }) => {
         console.log('newToken', address);
+        tokenActions
+          .load()(dispatch, getState)
+          .then(() => {
+            window.history.pushState({ page: 'Detail' }, 'New ETF-Token', `/${address}`);
+          });
       });
   }
 };
